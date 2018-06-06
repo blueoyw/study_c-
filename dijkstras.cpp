@@ -1,94 +1,100 @@
-// A C++ program for Dijkstra's single source shortest path algorithm.
-// The program is for adjacency matrix representation of the graph
-
 #include <stdio.h>
-#include <limits.h>
 
-// Number of vertices in the graph
-#define V 9
+#define N 100
+#define INF 100000
 
-// A utility function to find the vertex with minimum distance value, from
-// the set of vertices not yet included in shortest path tree
-int minDistance(int dist[], bool sptSet[])
+int a[N+1][N+1];
+int visit[N+1];
+int dist[N+1];
+int start, end;
+int n,m;
+
+// input 값 sample
+// 첫번째 라인에는 정점의 개수, 그리고 시작 정점, 도착 정점이 입력
+// 두번째 라인에는 정점별 간선의 입력받을 가중치의 개수(m)가 입력된다.
+// 세번째 라인부터는 정점별 간선의 입력받을 가중치가 m번이 들어온다.
+
+
+/*
+
+   7 1 7
+   9
+   1 2 4
+   1 3 2
+   2 4 1
+   2 5 2
+   3 4 7
+   3 6 3
+   4 7 3
+   5 7 1
+   6 7 5
+
+*/
+
+
+void input()
 {
-	// Initialize min value
-	int min = INT_MAX, min_index;
+	int i,j;
+	int from,to;
+	int w;
+	scanf("%d %d %d",&n,&start,&end); // n 정점 개수 
+	scanf("%d",&m); //가중치 개수
 
-	for (int v = 0; v < V; v++)
-		if (sptSet[v] == false && dist[v] <= min)
-			min = dist[v], min_index = v;
+	// 각 정점으로 가는 간선의 가중치를 무한대로 초기화한다.(최소값을 구하기위해)
+	for ( i =1;i <=n; i++)
+		for ( j =1; j <=n; j++)
+			if ( i!= j)
+				a[i][j] = INF;
 
-	return min_index;
-}
-
-// A utility function to print the constructed distance array
-int printSolution(int dist[], int n)
-{
-	printf("Vertex   Distance from Source\n");
-	for (int i = 0; i < V; i++)
-		printf("%d         %d\n", i, dist[i]);
-}
-
-// Function that implements Dijkstra's single source shortest path algorithm
-// for a graph represented using adjacency matrix representation
-void dijkstra(int graph[V][V], int src)
-{
-	int dist[V];     // The output array.  dist[i] will hold the shortest
-	// distance from src to i
-
-	bool sptSet[V]; // sptSet[i] will true if vertex i is included in shortest
-	// path tree or shortest distance from src to i is finalized
-
-	// Initialize all distances as INFINITE and stpSet[] as false
-	for (int i = 0; i < V; i++)
-		dist[i] = INT_MAX, sptSet[i] = false;
-
-	// Distance of source vertex from itself is always 0
-	dist[src] = 0;
-
-	// Find shortest path for all vertices
-	for (int count = 0; count < V-1; count++)
+	for ( i =1;i <= m; i++) // 정점에서 정점으로 가는 간선의 가중치가 입력
 	{
-		// Pick the minimum distance vertex from the set of vertices not
-		// yet processed. u is always equal to src in the first iteration.
-		int u = minDistance(dist, sptSet);
-
-		// Mark the picked vertex as processed
-		sptSet[u] = true;
-
-		// Update dist value of the adjacent vertices of the picked vertex.
-		for (int v = 0; v < V; v++)
-
-			// Update dist[v] only if is not in sptSet, there is an edge from 
-			// u to v, and total weight of path from src to  v through u is 
-			// smaller than current value of dist[v]
-			if (!sptSet[v] && graph[u][v] && dist[u] != INT_MAX 
-					&& dist[u]+graph[u][v] < dist[v])
-				dist[v] = dist[u] + graph[u][v];
+		scanf("%d %d %d",&from,&to,&w);
+		a[from][to] =w;
 	}
 
-	// print the constructed distance array
-	printSolution(dist, V);
+	for ( i =1;i <=n; i++)
+		dist[i] = INF;
+
 }
 
-// driver program to test above function
-int main()
+void dijkstra()
 {
-	/* Let us create the example graph discussed above */
-	int graph[V][V] = {
-		{0, 4, 0, 0, 0, 0, 0, 8, 0},
-		{4, 0, 8, 0, 0, 0, 0, 11, 0},
-		{0, 8, 0, 7, 0, 4, 0, 0, 2},
-		{0, 0, 7, 0, 9, 14, 0, 0, 0},
-		{0, 0, 0, 9, 0, 10, 0, 0, 0},
-		{0, 0, 4, 14, 10, 0, 2, 0, 0},
-		{0, 0, 0, 0, 0, 2, 0, 1, 6},
-		{8, 11, 0, 0, 0, 0, 1, 0, 7},
-		{0, 0, 2, 0, 0, 0, 6, 7, 0}
-	};
+	int i,j;
+	int min;
+	int v;
 
-	dijkstra(graph, 0);
+	dist[start] = 0;        // 시작점의 거리 0
 
+	for ( i =1;i <=n; i++)
+	{
+		min = INF;
+
+		for ( j =1 ; j <=n; j++)
+		{
+			if ( visit[j] == 0 && min > dist[j])    // 갈수 있는 정점중에 가장 가까운 정점 선택
+			{
+				min = dist[j];
+				v = j;
+			}
+		}
+
+		visit[v] = 1;   // 가장 가까운 정점으로 방문, i정점에서 가장 가까운 최단경로 v
+
+		for ( j = 1;j <= n; j++)      
+		{
+			if ( dist[j] > dist[v] + a[v][j])       // 방문한 정점을 통해 다른 정점까지의 거리가 짧아지는지 계산하여 누적된값 저장
+				dist[j] = dist[v] + a[v][j];
+		}
+	}
+}
+
+
+int main(void)
+{
+	input();
+	dijkstra();
+	printf("%d \n",dist[end]);
 	return 0;
 }
+
 

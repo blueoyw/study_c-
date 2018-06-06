@@ -1,6 +1,7 @@
 #include <iostream>
 #include <array>
 #include <map>
+#include <unordered_map>
 
 using namespace std;
 
@@ -75,6 +76,15 @@ int main( int argc, char** argv )
 	for( auto it = m.begin() ; it != m.end() ; it ++ ) {
 		cout << it->first << "=" << it->second << endl;
 	}
+	
+	unordered_map<int, int> um;
+	um.insert( make_pair(1,10) );
+	um.insert( pair<int,int>(2,20) );
+
+	for( auto it = um.begin() ; it != um.end() ; it ++ ) {
+		cout << it->first << "=" << it->second << endl;
+	}
+
 
 	return 0;
 }
