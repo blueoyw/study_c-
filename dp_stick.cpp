@@ -1,0 +1,1 @@
+http://leeyongjeon.tistory.com/entry/C%EC%96%B8%EC%96%B4-%EB%A7%89%EB%8C%80-%EC%9E%90%EB%A5%B4%EA%B8%B0Rod-cutting-in-C-%EB%8F%99%EC%A0%81-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8DDynamicProgramming

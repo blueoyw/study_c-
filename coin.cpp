@@ -1,41 +1,39 @@
 #include <iostream>
-:q
+#include <map>
 
-public class CoinChange {
+using namespace std;
 
-	private int ten;
-	private int fifty;
-	private int hundred;
-	private int fiveHundred;
+int main ()
+{
+	int change;
+	cin >> change;
+	map<int,int> mapChange;
+	mapChange.insert( make_pair(10,0));
+	mapChange.insert( make_pair(50,0));
+	mapChange.insert( make_pair(100,0));
+	mapChange.insert( make_pair(500,0));
 
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		CoinChange cc = new CoinChange();
 
-		System.out.print("거스름돈을 입력하세요 : ");
-		int change = sc.nextInt();
-
-		while(change >= 500) {
-			change -= 500;
-			cc.fiveHundred++;
-		}
-		while(change >= 100) {
-			change -= 100;
-			cc.hundred++;
-		}
-		while(change >= 50) {
-			change -= 50;
-			cc.fifty++;
-		}
-		while(change >= 10) {
-			change -= 10;
-			cc.ten++;
-		}
-
-		System.out.println("10원짜리 " + cc.ten + "개");
-		System.out.println("50원짜리 " + cc.fifty + "개");
-		System.out.println("100원짜리 " + cc.hundred + "개");
-		System.out.println("500원짜리 " + cc.fiveHundred + "개");
-		System.out.println("총 동전 개수는 " + (cc.ten + cc.fifty + cc.hundred + cc.fiveHundred) + "개 입니다.");
+	while( change >= 500 ) {
+		change -= 500;
+		mapChange[500] ++;
 	}
+	while( change >= 100 ) {
+		change -= 100;
+		mapChange[100] ++;
+	}
+	while( change >= 50 ) {
+		change -= 50;
+		mapChange[50] ++;
+	}
+	while( change >= 10 ) {
+		change -= 10;
+		mapChange[10] ++;
+	}
+
+	for( auto it = mapChange.begin(); it != mapChange.end(); it ++ ) {
+
+		cout << it->first << "=" << it->second << endl;
+	}
+
 }

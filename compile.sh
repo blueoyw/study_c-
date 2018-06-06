@@ -1,6 +1,8 @@
 #!/bin/bash
 #SRC=fibonacci.cpp
-SRC=sort.cpp
+#SRC=sort.cpp
+#SRC=coin.cpp
+SRC=test.cpp
 #SRC=constructor.cpp
 #SRC=stl.cpp
 #SRC=stack.cpp
