@@ -69,7 +69,6 @@ public:
 
 int main( int argc, char** argv )
 {
-	/*
 	cout << "unique_ptr" << endl;
 	std::unique_ptr<VChild> p1(new VChild());
 	p1->print();
@@ -77,6 +76,9 @@ int main( int argc, char** argv )
 	p1->print();
 	p1.reset();
 	p3->print();
+
+	//auto p4 = make_unique<VChild>(); //c++14
+	//p4->print();
 
 	cout << "shared_ptr" << endl;
 	shared_ptr<VChild> sp1(new VChild());
@@ -90,7 +92,6 @@ int main( int argc, char** argv )
 	cout << "shared_ptr count" << sp2.use_count() << endl;
 	sp2.reset();	//call destructor
 	cout << "shared_ptr count" << sp2.use_count() << endl;
-	*/
 
 	//recursive reference
 	cout << "recursive reference problem" << endl;
