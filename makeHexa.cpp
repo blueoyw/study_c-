@@ -1,22 +1,11 @@
 #include <iostream>
-#include <stdio.h>
-#include <string.h>
 
 using namespace std;
 
-void solution( int red, int green, int blue )
-{
-	char buf[7];
-	int idx=0;
-	idx = sprintf( buf, "%2X", red);
-	idx += sprintf( buf+idx, "%2X", green);
-	idx += sprintf( buf+idx, "%2X", blue);
-
-	cout << buf << endl;
-}
-
 string toHexa( int x )
 {
+	if( x == 0) 
+		return "00";
 	string rtn = "";
 	int tmp = 0;
 	int i = 0;
@@ -57,7 +46,7 @@ string toHexa( int x )
 int main()
 {
 	//solution( 255,255,9);
-	cout << toHexa( 255 ) << toHexa(255) << toHexa(9) << endl;
+	cout << toHexa( 255 ) << toHexa(255) << toHexa(0) << endl;
 	return 0;
 }
 

@@ -32,12 +32,6 @@ int getSmallIndex()
 
 void dijkstra(int start) 
 {
-	/*
-	for( int i=0; i< number; i++ ) {
-		d[i] = a[start][i];
-	}
-	v[start] = true;
-	*/
 	for( int i=0; i< number; i++ ) {
 		d[i] = INF;
 	}

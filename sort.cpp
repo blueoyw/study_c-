@@ -1,4 +1,5 @@
 #include <iostream>
+#include <algorithm>
 using namespace std;
 
 void quickSort(int *array, int low, int high)
@@ -23,23 +24,41 @@ void quickSort(int *array, int low, int high)
 			j--;
 		}
 	}
-	if (j > low) {
-		cout << "j=" << j << endl;
+
+	if (low < j) {
+		//cout << "j=" << j << endl;
 		quickSort(array, low, j);
 	}
 	if (i < high) {
-		cout << "i=" << i << endl;
+		//cout << "i=" << i << endl;
 		quickSort(array, i, high);
 	}
 }
 
-int main(int argc, char** argv)
+void print( int* data, int size )
 {
-	//bubble sort
-	int data[] = {8, 10, 7, 3 , 1};
-	int n = 5;
-	/*
+	for( int i=0; i<size; i++ ) {
+		cout << data[i] << endl;
+	}
+}
 
+void selectionSort( int* data, int n)
+{
+	int min = 0;
+	for( int i=0; i<n-1; i++ ) {
+		min = data[i];
+		for( int j=i+1; j< n; j++ ) {
+			if ( min > data[j] ) {
+				data[i] = data[j];
+				data[j] = min;
+				min = data[i];
+			}
+		}
+	}
+}
+
+void bubbleSort( int* data, int n)
+{
 	int tmp = 0;
 	for( int i=0; i<n; i++ ) {
 		for( int j=0; j< n-(i+1); j++ ) {
@@ -50,13 +69,42 @@ int main(int argc, char** argv)
 			}
 		}
 	}
-	*/
-	//end
+}
 
-	//quick sort
-	quickSort( data, 0, n);
-	for( int i=0; i<n; i++ ) {
-		cout << data[i] << endl;
+void insertionSort( int* data, int n) 
+{
+	for ( int i=1; i< n; i++ ) {
+		int j = i;
+		int temp = data[i];
+		while( j > 0 && data[j-1] > temp)  {
+			data[j] = data[j-1];
+			j--;
+		}
+		data[j] = temp;
 	}
+}
+
+int main(int argc, char** argv)
+{
+	cout << "selection sort" << endl;
+	int data[] = {8, 10, 7, 3 , 1};
+	int n = 5;
+	selectionSort ( data, 5);
+	print( data, n);
+
+	cout << "bubble sort" << endl;
+	int data1[] = {8, 10, 7, 3 , 1};
+	bubbleSort( data1, 5);
+	print( data1, n);
+
+	cout << "quick sort" << endl;
+	int data2[] = {8, 10, 7, 3 , 1};
+	quickSort( data2, 0, n-1); //why n-1, -1 is pivot
+	print( data2, n);
+
+	cout << "insertion sort" << endl;
+	int data3[] = {8, 10, 7, 3 , 1};
+	insertionSort( data3, 5);
+	print( data3, n);
 	
 }
