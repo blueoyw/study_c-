@@ -3,21 +3,25 @@
 
 using namespace std;
 
+template< typename T >
 class Singleton
 {
 public:
-	static Singleton* getInstance()
+	static T* getInstance()
 	{
-		if( instance==NULL )
-			instance = new Singleton();
-		return instance;
+		if( _instance==NULL )
+			_instance = new T();
+		return _instance;
 	}
 	Singleton(const Singleton&) = delete ;
 	Singleton& operator=(const Singleton&) = delete ;
 private:
-	Singleton();
-	static Singleton* instance;
+	Singleton(){};
+	static T* _instance;
 };
+
+template<typename T> 
+T* Singleton<T>::_instance = NULL;
 
 enum AnimalType {
 	CAT,
