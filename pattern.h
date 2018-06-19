@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <memory>
 /*
  * Cat lives in East.
  * Dag lives in West.

@@ -1,6 +1,7 @@
 #!/bin/bash
 #SRC=test.cpp
-SRC=factory.cpp
+#SRC=factory.cpp
+SRC=observer.cpp
 #SRC=factoryMethod.cpp
 #SRC=factoryAbstract.cpp
 #SRC=fibonacci.cpp
