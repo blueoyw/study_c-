@@ -1,5 +1,9 @@
 #pragma once
 #include <iostream>
+/*
+ * Cat lives in East.
+ * Dag lives in West.
+ */
 
 using namespace std;
 
@@ -31,18 +35,31 @@ enum AnimalType {
 class IAnimal
 {
 public:
-	virtual void speak() = 0;
+	virtual void draw() {}
 };
 
 class Cat : public IAnimal
 {
 public:
-	void speak() { cout << "Meow" << endl; }
+	void draw() { cout << "Meow" << endl; }
 };
 
 class Dog : public IAnimal
 {
 public:
-	void speak() { cout << "Woof" << endl; }
+	void draw() { cout << "Woof" << endl; }
 };
+
+class CatFood : public IAnimal
+{
+public:
+	void draw() { cout << "CatFood" << endl; }
+};
+
+class DogFood : public IAnimal
+{
+public:
+	void draw() { cout << "DogFood" << endl; }
+};
+
 
