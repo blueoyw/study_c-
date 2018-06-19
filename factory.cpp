@@ -45,10 +45,10 @@ int main()
 	cout << "start" <<endl;
 	AnimalFactory* factory = AnimalFactory::getInstance();
 	Cat* cat = (Cat*)factory->createAnimal( AnimalType::CAT );
-	cat->speak();
+	cat->draw();
 
 	Dog* dog = (Dog*)factory->createAnimal( AnimalType::DOG );
-	dog->speak();
+	dog->draw();
 
 	return 0;
 }

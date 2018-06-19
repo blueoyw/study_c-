@@ -1,47 +1,56 @@
 #include <pattern.h>
 
 
-//using namespace std;
-
 class IAnimalFactory
 {
 public:
-	virtual IAnimal* factory( ) = 0;
+	virtual IAnimal* createAnimal( ) = 0;
+	virtual IAnimal* createFood( ) = 0;
 	virtual ~IAnimalFactory() {}
-
-	IAnimal anOperation()
-	{
-		IAnimal* animal = factory();
-		animal->draw();
-	}
 };
 
 class EastAnimalFactory : public IAnimalFactory
 {
 public:
-	IAnimal* factory()
+	IAnimal* createAnimal() 
 	{
 		return new Cat();
+	}
+	IAnimal* createFood() 
+	{
+		return new CatFood();
 	}
 };
 
 class WestAnimalFactory : public IAnimalFactory
 {
 public:
-	IAnimal* factory()
+	IAnimal* createAnimal() 
 	{
 		return new Dog();
 	}
+	IAnimal* createFood() 
+	{
+		return new DogFood();
+	}
 };
+
+
+void raise( IAnimalFactory* factory)
+{
+	factory->createAnimal()->draw();
+	factory->createFood()->draw();
+}
 
 int main()
 {
 	cout << "start" <<endl;
 	IAnimalFactory* eastAnimalFactory = Singleton<EastAnimalFactory>::getInstance();
-	eastAnimalFactory->anOperation();
+	raise( eastAnimalFactory );
+
 	
 	IAnimalFactory* westAnimalFactory = Singleton<WestAnimalFactory>::getInstance();
-	westAnimalFactory->anOperation();
+	raise( westAnimalFactory);
 
 	return 0;
 }
