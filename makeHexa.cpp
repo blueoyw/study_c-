@@ -46,7 +46,7 @@ string toHexa( int x )
 int main()
 {
 	//solution( 255,255,9);
-	cout << toHexa( 255 ) << toHexa(255) << toHexa(0) << endl;
+	cout << toHexa( 254 ) << toHexa(255) << toHexa(0) << endl;
 	return 0;
 }
 
